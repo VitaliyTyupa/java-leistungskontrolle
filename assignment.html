@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>assignment.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+<link rel="stylesheet" href="file:///c%3A/Users/K_Schenker/Desktop/dev/settings/markdown-style.css" type="text/css">
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="zeiterfassungsbericht-erstellen">Zeiterfassungsbericht erstellen</h1>
+<h2 id="ausgangssituation">Ausgangssituation</h2>
+<p>Das Unternehmen Code-Like-A-Pro möchte zukünftig die Arbeitszeiten seiner Mitarbeiter aufzeichnen. Dazu soll ein Zeiterfassungssystem eingeführt werden.</p>
+<p>Wenn ein Mitarbeiter zur Arbeit kommt, meldet er sich am System an. Das System vermerkt dann die aktuelle Uhrzeit in einer speziellen Erfassungsdatei, deren Format in den folgenden Abschnitten noch erläutert wird. Hat der Mitarbeiter Feierabend, meldet er sich wieder vom System ab. Auch hier speichert das System die aktuelle Uhrzeit in der Erfassungsdatei.</p>
+<p>Für jeden Mitarbeiter und jeden Monat werden neue Erfassungsdateien erstellt und in einem zentralen Verzeichnis abgelegt. Der Name einer Erfassungsdatei setzt sich aus drei Feldern zusammen: Jahr, Monat und Personalnummer des Mitarbeiters. Die Felder werden durch Bindestriche getrennt. Die Dateiendung ist <code>txt</code>. Beispiel: <code>2024-03-EF0123.txt</code>. Eine Personalnummer besteht ausschließlich aus Buchstaben und Ziffern. Ihre genaue Zusammensetzung ist für diese Aufgabe irrelevant.</p>
+<p>Eine Erfassungsdatei enthält keine, eine oder beliebig viele Zeilen / Einträge. Für eine Zeile gilt:</p>
+<ul>
+<li>Eine Zeile darf leer sein bzw. nur aus Leerzeichen bestehen.</li>
+<li>Nicht leere Zeilen setzen sich zusammen aus den drei Feldern <code>Tag</code>, <code>Stunden</code> und <code>Minuten</code>, jeweils getrennt durch Semikolons.</li>
+<li>Alle anderen Zeilen deuten auf fehlerhafte Daten hin.</li>
+</ul>
+<p>Hier ein Beispiel für die Datei <code>2024-03-ef001.txt</code>:</p>
+<pre class="hljs"><code><div>
+1; 08; 15
+
+1; 12; 05
+2; 09; 00
+3; 09; 10
+5; 08; 50
+5; 16; 45
+7; 21; 15
+
+7; 06; 15
+28; 16; 45
+31; 07; 45
+</div></code></pre>
+<p>Folgende Informationen lassen sich unter anderem aus dieser Datei entnehmen:</p>
+<ul>
+<li>Am 01.03.2024 kam der Mitarbeiter um 08:15 Uhr auf Arbeit.</li>
+<li>Am 01.03.2024 machte der Mitarbeiter um 12:05 Uhr Feierabend.</li>
+<li>Am 02.03.2024 begann der Mitarbeiter seine Arbeit um 09:00.</li>
+<li>Da ein zweiter Eintrag für den 02.03.2024 fehlt, wissen wir nicht, wann er Feierabend machte.</li>
+<li>Für den 04.03.2024 gibt es keine Einträge. Hier war der Mitarbeiter also abwesend.</li>
+</ul>
+<p>Es werden folgende Annahmen gemacht:</p>
+<ul>
+<li>Für jeden Tag des Monats gibt es keinen, einen oder zwei Einträge.</li>
+<li>Wenn für einen Tag zwei Einträge existieren, so gibt der erste den Arbeitsbeginn an und der zweite den Feierabend.</li>
+<li>Falls nur ein Eintrag existiert, interpretieren wir ihn immer als Arbeitsbeginn.</li>
+<li>Wenn keine Einträge für einen Tag existieren, gehen wir davon aus, dass der Mitarbeiter an diesem Tag nicht gearbeitet hat.</li>
+<li>Wenn die Uhrzeit des zweiten Eintrages vor der Uhrzeit des ersten Eintrages liegt, arbeitet der Mitarbeiter über Nacht. In seiner Arbeitszeit ist also ein Tageswechsel enthalten. Die Arbeitsdauer wird jedoch vollständig auf den Vortag angerechnet.</li>
+</ul>
+<p>Ein Beispiel für die Berechnung der Arbeitsdauer &quot;über Nacht&quot;: Wenn die Schicht des Mitarbeiters am Tag 3 um 21:15 Uhr beginnt und erst am Folgetag um 06:00 Uhr endet, zeichnet das System folgende Einträge auf:</p>
+<pre class="hljs"><code><div>03; 21; 15
+03; 06; 00
+</div></code></pre>
+<p>Es erfolgt in diesem Fall kein Eintrag für Tag 4. Die Arbeitsdauer für Tag 3 beträgt 8h 45m.</p>
+<h2 id="aufgabenstellung">Aufgabenstellung</h2>
+<p>Das Code-Like-A-Pro Unternehmen hat dich damit beauftragt, eine Konsolenanwendung zu entwickeln, die eine Erfassungdatei einliest und deren Daten formatiert ausgibt. Zusätzlich sollst du folgende Statistiken berechnen:</p>
+<ul>
+<li>Die Arbeitsdauer in Stunden und Minuten pro Tag.</li>
+<li>Die Gesamtarbeitsdauer des Monats in Stunden und Minuten.</li>
+<li>Die Anzahl der Tage, an denen der Mitarbeiter vollständig präsent und vollständig abwesend war.</li>
+<li>Die Anzahl der Tage, für die nur ein Eintrag existiert, also eine Feierabend-Zeit fehlt.</li>
+<li>Die Anzahl an Einträgen in der Erfassungdatei.</li>
+</ul>
+<p>Dein Programm soll abwärtskompatibel zu alten JDK Versionen sein. Aus diesem Grund musst du dich <strong>auf folgende Datentypen beschränken</strong>:</p>
+<ul>
+<li>Primitive Datentypen und deren Wrapper-Klassen</li>
+<li>Arrays</li>
+<li>Die Klasse Arrays</li>
+<li>String, StringBuilder</li>
+<li>Scanner, Path</li>
+<li>IOException</li>
+<li>StandardCharsets</li>
+</ul>
+<p>Du darfst also insbesondere <strong>keinen Gebrauch von Collections und Streams machen</strong>. Du kannst deine Ausgaben mit <code>System.out</code> und <code>System.err</code> erzeugen.</p>
+<p>Für dein Programm gelten weitere Einschränkungen: Dein Programm soll auf einem System laufen, das über sehr begrenzte Hardware-Ressourcen verfügt. <strong>Aus diesem Grund ist es nicht möglich, die gesamte Erfassungsdatei in den Arbeitsspeicher zu laden bzw. deren Einträge in einen Array zu speichern</strong>. Du musst also die Erfassungsdatei zeilenweise mit einem Scanner abarbeiten und hast damit <strong>keinen wahlfreien Zugriff auf die Einträge</strong>. Bildlich gesprochen: Du erhältst die Einträge auf einem Transportband - Eintrag für Eintrag, aber hast keine Möglichkeit, alle bisher entnommenen Einträge zwischenzuspeichern. Du &quot;siehst&quot; immer nur deinen gerade entnommenen Eintrag und den Eintrag, der als nächstes folgt.</p>
+<p>Du hast großes Glück: Dein Kollege hat bereits mit der Entwicklung begonnen und die oben genannten Klassen importiert. Außerdem hat er schon alle notwendigen Methoden vordefiniert und mit Kommentaren versehen. Deine Aufgabe ist es nun, diese Methoden zu implementieren. <strong>Beachte jedoch die Coding-Guidelines deines Teams</strong>:</p>
+<ul>
+<li>Der vorgegebene Quelltext muss exakt übernommen werden. Umbenennungen sind untersagt.</li>
+<li>Zusätzliche Imports sind unzulässig.</li>
+<li>Es dürfen zusätzliche Konstanten hinzugefügt werden.</li>
+<li>Zusätzliche Methoden sind zulässig.</li>
+<li>Es ist SNAKE_CASE für Konstanten zu verwenden und camelCase für Methoden und Variablen.</li>
+<li>Hungarian Notation wie <code>iCount</code> oder <code>sName</code> ist untersagt.</li>
+<li>Es müssen aussagekräftige Bezeichner verwendet werden. Auf Abkürzungen wie <code>idx</code> oder <code>rng</code> ist zu verzichten. Ausnahme sind Laufvariablen wie <code>i</code> und <code>j</code> bei Schleifen.</li>
+</ul>
+<p>Du kannst dir zu Testzwecken weitere Erfassungsdateien anlegen. <strong>Das oben beschriebene Format dieser Erfassungsdateien darf jedoch nicht verändert werden</strong>.</p>
+<p>Das Programm soll wie folgt aufgerufen werden: <code>TimeSheetReport &lt;filename&gt;</code>, wobei <code>&lt;filename&gt;</code> tatsächlich nur ein Name wie <code>2024-01-ef005</code> ist, also kein Pfad und keine Dateiendung! Das Programm bildet aus dem Namen und der Dateiendung <code>txt</code> und dem Datenverzeichnis <code>time-sheets</code> einen Pfad.</p>
+<p>Wie dein Programm die Daten formatieren soll, kannst du im Abschnitt <a href="#programmausgaben-f%C3%BCr-die-mitgelieferten-beispieldateien">Programmausgaben</a> nachlesen.</p>
+<p>Weitere Hinweise kannst du den Kommentaren im Quelltext entnehmen. Viel Erfolg!</p>
+<h2 id="programmausgaben-f%C3%BCr-die-mitgelieferten-beispieldateien">Programmausgaben für die mitgelieferten Beispieldateien</h2>
+<p>Die folgenden Ausgaben helfen dir dabei, die Korrektheit deines Programms zu prüfen.</p>
+<p>Für die Zeiterfassungsdatei <code>2024-03-ef001</code> erzeugt das Programm folgende Ausgabe:</p>
+<pre class="hljs"><code><div>======================================================================
+YEAR: 2024 / MONTH: 03 / ID: EF001
+======================================================================
+
+DATE       | START | END   | DURATION | REMARKS
+----------------------------------------------------------------------
+01.03.2024 | 08:15 | 12:05 | 03h 50m  | fully present
+02.03.2024 | 09:00 | n/a   | n/a      | clarification needed
+03.03.2024 | 09:10 | n/a   | n/a      | clarification needed
+04.03.2024 | n/a   | n/a   | n/a      | absent
+05.03.2024 | 08:50 | 16:45 | 07h 55m  | fully present
+06.03.2024 | n/a   | n/a   | n/a      | absent
+07.03.2024 | 21:15 | 06:15 | 09h 00m  | fully present
+08.03.2024 | n/a   | n/a   | n/a      | absent
+09.03.2024 | n/a   | n/a   | n/a      | absent
+10.03.2024 | n/a   | n/a   | n/a      | absent
+11.03.2024 | n/a   | n/a   | n/a      | absent
+12.03.2024 | n/a   | n/a   | n/a      | absent
+13.03.2024 | n/a   | n/a   | n/a      | absent
+14.03.2024 | n/a   | n/a   | n/a      | absent
+15.03.2024 | n/a   | n/a   | n/a      | absent
+16.03.2024 | n/a   | n/a   | n/a      | absent
+17.03.2024 | n/a   | n/a   | n/a      | absent
+18.03.2024 | n/a   | n/a   | n/a      | absent
+19.03.2024 | n/a   | n/a   | n/a      | absent
+20.03.2024 | n/a   | n/a   | n/a      | absent
+21.03.2024 | n/a   | n/a   | n/a      | absent
+22.03.2024 | n/a   | n/a   | n/a      | absent
+23.03.2024 | n/a   | n/a   | n/a      | absent
+24.03.2024 | n/a   | n/a   | n/a      | absent
+25.03.2024 | n/a   | n/a   | n/a      | absent
+26.03.2024 | n/a   | n/a   | n/a      | absent
+27.03.2024 | n/a   | n/a   | n/a      | absent
+28.03.2024 | 16:45 | n/a   | n/a      | clarification needed
+29.03.2024 | n/a   | n/a   | n/a      | absent
+30.03.2024 | n/a   | n/a   | n/a      | absent
+31.03.2024 | 07:45 | n/a   | n/a      | clarification needed
+
+----------------------------------------------------------------------
+WORKING TIME : 20h 45m
+PRESENT      : 03
+ABSENT       : 24
+INCOMPLETE   : 04
+RECORDS      : 10
+----------------------------------------------------------------------
+</div></code></pre>
+<p>Für die Zeiterfassungsdatei <code>2024-02-ef001</code> lautet die Ausgabe:</p>
+<pre class="hljs"><code><div>======================================================================
+YEAR: 2024 / MONTH: 02 / ID: EF001
+======================================================================
+
+DATE       | START | END   | DURATION | REMARKS
+----------------------------------------------------------------------
+01.02.2024 | n/a   | n/a   | n/a      | absent
+02.02.2024 | n/a   | n/a   | n/a      | absent
+03.02.2024 | n/a   | n/a   | n/a      | absent
+04.02.2024 | n/a   | n/a   | n/a      | absent
+05.02.2024 | n/a   | n/a   | n/a      | absent
+06.02.2024 | n/a   | n/a   | n/a      | absent
+07.02.2024 | n/a   | n/a   | n/a      | absent
+08.02.2024 | n/a   | n/a   | n/a      | absent
+09.02.2024 | n/a   | n/a   | n/a      | absent
+10.02.2024 | n/a   | n/a   | n/a      | absent
+11.02.2024 | n/a   | n/a   | n/a      | absent
+12.02.2024 | n/a   | n/a   | n/a      | absent
+13.02.2024 | n/a   | n/a   | n/a      | absent
+14.02.2024 | n/a   | n/a   | n/a      | absent
+15.02.2024 | n/a   | n/a   | n/a      | absent
+16.02.2024 | n/a   | n/a   | n/a      | absent
+17.02.2024 | n/a   | n/a   | n/a      | absent
+18.02.2024 | n/a   | n/a   | n/a      | absent
+19.02.2024 | n/a   | n/a   | n/a      | absent
+20.02.2024 | n/a   | n/a   | n/a      | absent
+21.02.2024 | n/a   | n/a   | n/a      | absent
+22.02.2024 | n/a   | n/a   | n/a      | absent
+23.02.2024 | n/a   | n/a   | n/a      | absent
+24.02.2024 | n/a   | n/a   | n/a      | absent
+25.02.2024 | n/a   | n/a   | n/a      | absent
+26.02.2024 | n/a   | n/a   | n/a      | absent
+27.02.2024 | n/a   | n/a   | n/a      | absent
+28.02.2024 | n/a   | n/a   | n/a      | absent
+29.02.2024 | n/a   | n/a   | n/a      | absent
+
+----------------------------------------------------------------------
+WORKING TIME : 00h 00m
+PRESENT      : 00
+ABSENT       : 29
+INCOMPLETE   : 00
+RECORDS      : 00
+----------------------------------------------------------------------
+</div></code></pre>
+<p>Für die Datei <code>2024-01-ef005</code> ist die Ausgabe wie folgt:</p>
+<pre class="hljs"><code><div>======================================================================
+YEAR: 2024 / MONTH: 01 / ID: EF005
+======================================================================
+
+DATE       | START | END   | DURATION | REMARKS
+----------------------------------------------------------------------
+01.01.2024 | n/a   | n/a   | n/a      | absent
+02.01.2024 | n/a   | n/a   | n/a      | absent
+03.01.2024 | 13:25 | n/a   | n/a      | clarification needed
+04.01.2024 | n/a   | n/a   | n/a      | absent
+05.01.2024 | 12:05 | 18:23 | 06h 18m  | fully present
+06.01.2024 | 10:45 | n/a   | n/a      | clarification needed
+07.01.2024 | n/a   | n/a   | n/a      | absent
+08.01.2024 | 10:20 | n/a   | n/a      | clarification needed
+09.01.2024 | 07:50 | n/a   | n/a      | clarification needed
+10.01.2024 | 06:00 | 14:30 | 08h 30m  | fully present
+11.01.2024 | n/a   | n/a   | n/a      | absent
+12.01.2024 | n/a   | n/a   | n/a      | absent
+13.01.2024 | n/a   | n/a   | n/a      | absent
+14.01.2024 | n/a   | n/a   | n/a      | absent
+15.01.2024 | n/a   | n/a   | n/a      | absent
+16.01.2024 | n/a   | n/a   | n/a      | absent
+17.01.2024 | n/a   | n/a   | n/a      | absent
+18.01.2024 | n/a   | n/a   | n/a      | absent
+19.01.2024 | n/a   | n/a   | n/a      | absent
+20.01.2024 | n/a   | n/a   | n/a      | absent
+21.01.2024 | n/a   | n/a   | n/a      | absent
+22.01.2024 | n/a   | n/a   | n/a      | absent
+23.01.2024 | n/a   | n/a   | n/a      | absent
+24.01.2024 | n/a   | n/a   | n/a      | absent
+25.01.2024 | n/a   | n/a   | n/a      | absent
+26.01.2024 | n/a   | n/a   | n/a      | absent
+27.01.2024 | n/a   | n/a   | n/a      | absent
+28.01.2024 | n/a   | n/a   | n/a      | absent
+29.01.2024 | n/a   | n/a   | n/a      | absent
+30.01.2024 | n/a   | n/a   | n/a      | absent
+31.01.2024 | 19:20 | 03:15 | 07h 55m  | fully present
+
+----------------------------------------------------------------------
+WORKING TIME : 22h 43m
+PRESENT      : 03
+ABSENT       : 24
+INCOMPLETE   : 04
+RECORDS      : 10
+----------------------------------------------------------------------
+</div></code></pre>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html">Arrays</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html">IOException</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html">Path</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Scanner.html">Scanner</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/charset/StandardCharsets.html">StandardCharsets</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html">String</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html">StringBuilder</a></li>
+</ul>
+
+</body>
+</html>
